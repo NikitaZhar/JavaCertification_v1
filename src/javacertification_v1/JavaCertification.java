@@ -30,7 +30,6 @@ public class JavaCertification {
 			
 			count++;
 		}
-	
 	}
 	
 	static ArrayList<Question> getListOfQuestions() {
