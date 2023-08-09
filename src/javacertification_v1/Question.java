@@ -1,5 +1,7 @@
 package javacertification_v1;
 
+import java.util.ArrayList;
+
 public class Question {
 	private String questionText;
 	private String[] answerOptions;
@@ -14,6 +16,7 @@ public class Question {
 	}
 
 	public String getQuestionText() {
+		int response = questionText.indexOf(" ", 0);
 		return questionText;
 	}
 
@@ -30,7 +33,9 @@ public class Question {
 	}
 	
 	public void printQuestionText() {
-		System.out.println(questionText);
+		for(String toPrint : getSplittedString(questionText)) {
+			System.out.println(toPrint);
+		}
 	}
 	
 	public void printAnswerOptions() {
@@ -46,6 +51,30 @@ public class Question {
 	}
 	
 	public void printExplanation() {
-		System.out.println(explanation);
+		for(String toPrint : getSplittedString(explanation)) {
+			System.out.println(toPrint);
+		}
+	}
+	
+	private String[] getSplittedString(String inputString) {
+		ArrayList <String> buffer = new ArrayList();
+		int lengthOfString = 80;
+		int startIndex = 0;
+		int endIndex = startIndex + lengthOfString;
+		boolean endLoop = true;
+		do {
+			int nextBlank = inputString.indexOf(" ", endIndex);
+			if (nextBlank != -1) {
+				buffer.add(inputString.substring(startIndex, nextBlank));
+			} else {
+				buffer.add(inputString.substring(startIndex));
+				endLoop = false;
+			}
+			startIndex = nextBlank + 1;
+			endIndex = startIndex + lengthOfString;
+		} while (endLoop);
+		String[] splittedInput = new String[buffer.size()];
+		
+		return buffer.toArray(splittedInput);
 	}
 }

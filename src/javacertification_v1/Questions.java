@@ -24,6 +24,7 @@ public class Questions {
 			scanner.useDelimiter("#");
 			while(scanner.hasNextLine()) {
 				String question = scanner.next();
+				
 				scanner.skip(scanner.delimiter());
 				String answerOptions[] = scanner.next().split("%%");
 				scanner.skip(scanner.delimiter());
@@ -47,12 +48,12 @@ public class Questions {
 	}
 
 	public void runTest() {
-		
-        for (Question q : questions) {
-            q.printQuestionText();
-            q.printAnswerOptions();
-            q.printCorrectAnswers();
-            q.printExplanation();
+        for (Question question : questions) {
+        	System.out.println("\n");
+        	question.printQuestionText();
+        	question.printAnswerOptions();
+        	question.printCorrectAnswers();
+        	question.printExplanation();
         }
 	}
 }
