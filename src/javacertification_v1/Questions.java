@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Questions {
+	
+	// Подумать где лучше разместить константы
+	
+	final int NUMBER_RENEWED_QUESTIONS = 5;
+	final int NUMBER_QUESTIONS_FOR_TEST = 5;
+
 	Question[] questions;
 
 	Questions() {
@@ -13,6 +19,10 @@ public class Questions {
 
 		questions = new Question[stackQuestions.size()];
 		questions = stackQuestions.toArray(questions);
+	}
+	
+	protected int getTotalNumberOfQuestions() {
+		return questions.length;
 	}
 	
 	private ArrayList<Question> readQuestionsFromFile() {
@@ -24,15 +34,17 @@ public class Questions {
 			scanner.useDelimiter("#");
 			while(scanner.hasNextLine()) {
 				String question = scanner.next();
-				
+				scanner.skip(scanner.delimiter());
+				String code = scanner.next();
 				scanner.skip(scanner.delimiter());
 				String answerOptions[] = scanner.next().split("%%");
 				scanner.skip(scanner.delimiter());
 				String correctAnswers[] = scanner.next().split("%%");
 				scanner.skip(scanner.delimiter());
-				String answerText = scanner.nextLine();				
+				String answerText = scanner.nextLine();		
 				questions.add(new Question(
 						question,
+						code,
 						answerOptions,
 						correctAnswers,
 						answerText));
@@ -45,15 +57,5 @@ public class Questions {
 			}
 		}
 		return questions;
-	}
-
-	public void runTest() {
-        for (Question question : questions) {
-        	System.out.println("\n");
-        	question.printQuestionText();
-        	question.printAnswerOptions();
-        	question.printCorrectAnswers();
-        	question.printExplanation();
-        }
 	}
 }

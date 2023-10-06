@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class Question {
 	private String questionText;
+	private String codeText;
 	private String[] answerOptions;
 	private String[] correctAnswers;
 	private String explanation;
 	
-	public Question(String questionText, String[] answerOptions, String[] correctAnswers, String answerText) {
+	public Question(String questionText, String codeText, String[] answerOptions, String[] correctAnswers, String answerText) {
 		this.questionText = questionText;
+		this.codeText = codeText;
 		this.answerOptions = answerOptions;
 		this.correctAnswers = correctAnswers;
 		this.explanation = answerText;
@@ -31,11 +33,12 @@ public class Question {
 	public String getExplanation() {
 		return explanation;
 	}
-	
+
 	public void printQuestionText() {
-		for(String toPrint : getSplittedString(questionText)) {
-			System.out.println(toPrint);
+		for(String textToPrint : getSplittedString(questionText)) {
+			System.out.println(textToPrint);
 		}
+		System.out.println(codeText);
 	}
 	
 	public void printAnswerOptions() {
@@ -56,6 +59,9 @@ public class Question {
 		}
 	}
 	
+	
+	// Print lengthOfString = 80 symbols in the string
+	
 	private String[] getSplittedString(String inputString) {
 		ArrayList <String> buffer = new ArrayList();
 		int lengthOfString = 80;
@@ -65,8 +71,10 @@ public class Question {
 		do {
 			int nextBlank = inputString.indexOf(" ", endIndex);
 			if (nextBlank != -1) {
+//				System.out.println(" 1 " + inputString.substring(startIndex, nextBlank));
 				buffer.add(inputString.substring(startIndex, nextBlank));
 			} else {
+//				System.out.println(" 2 " + inputString.substring(startIndex));
 				buffer.add(inputString.substring(startIndex));
 				endLoop = false;
 			}
